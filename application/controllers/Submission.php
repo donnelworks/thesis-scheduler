@@ -40,14 +40,7 @@ class Submission extends CI_Controller
     function submit_data()
     {
         $post = $this->input->post();
-        $responses = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
-
-        $submission_form = $this->upload('submission_form', 'pdf');
-        $ktm = $this->upload('ktm', 'pdf|jpg|jpeg|png');
-
-        log_debug($submission_form['data']);
-        log_debug($ktm['data']);
-        die;
+        $res = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
 
         // Validation
         $rules = [
@@ -71,20 +64,29 @@ class Submission extends CI_Controller
         $validate_result = validate_form($rules);
 
         if ($validate_result['status']) {
-            if ($post['submit_action'] === "create") {
-                $this->submission->create_data($post);
-                $responses['data'] = ['message' => "Data berhasil ditambah"];
-            } else if ($post['submit_action'] === "update") {
-                $this->submission->update_data($post);
-                $responses['data'] = ['message' => "Data berhasil diubah"];
+            $submission_form = $this->upload('submission_form', 'pdf');
+            if (!$submission_form['status']) {
+                $res = ['success' => false, 'status_message' => "ERROR_UPLOAD", 'data' => ['field' => 'submission_form', 'message' => $submission_form['data']]];
+                echo json_encode($res);
+                return;
             }
+
+            $ktm = $this->upload('ktm', 'pdf|jpg|jpeg|png');
+            if (!$ktm['status']) {
+                $res = ['success' => false, 'status_message' => "ERROR_UPLOAD", 'data' => ['field' => 'ktm', 'message' => $ktm['data']]];
+                echo json_encode($res);
+                return;
+            }
+
+            $this->submission->create_data($post);
+            $res['data'] = ['message' => "Data berhasil ditambah"];
         } else {
-            $responses['success'] = false;
-            $responses['status_message'] = "FORM_VALIDATION_ERROR";
-            $responses['data'] = ['error' => $validate_result['error']];
+            $res['success'] = false;
+            $res['status_message'] = "FORM_VALIDATION_ERROR";
+            $res['data'] = ['error' => $validate_result['error']];
         }
 
-        echo json_encode($responses);
+        echo json_encode($res);
     }
 
     function delete_data()
@@ -140,15 +142,13 @@ class Submission extends CI_Controller
         $config['upload_path'] = './assets/files/submissions/';
         $config['file_name'] = $this->app->user()->nim . "-" . $file;
         $config['allowed_types'] = $allowed_types;
-        $config['max_size'] = 5000;
+        $config['max_size'] = 10000;
         $config['overwrite'] = TRUE;
 
         $this->upload->initialize($config);
-        $this->upload->set_message('upload_invalid_filetype', 'Tipe file tidak diizinkan, silakan unggah file PDF');
-        $this->upload->set_message('upload_file_exceeds_limit', "Ukuran file melebihi batas maksimal 5MB");
 
         if (!$this->upload->do_upload($file)) {
-            $result = ['status' => FALSE, 'data' => $this->upload->display_errors()];
+            $result = ['status' => FALSE, 'data' => $this->upload->display_errors('<p class="invalid-upload text-danger m-0">', '</p>')];
         } else {
             $result = ['status' => TRUE, 'data' => $this->upload->data()];
         }

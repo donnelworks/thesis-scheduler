@@ -46,6 +46,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Alert */
+.alert-primary {
+  color: var(--primary);
+  background-color: var(--soft-primary);
+  border-color: var(--primary);
+}
+.alert-primary .close, .alert-primary .mailbox-attachment-close {
+  color: var(--primary);
+  opacity: .2;
+}
 .alert-danger {
   color: var(--danger);
   background-color: var(--soft-danger);
@@ -53,6 +62,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 .alert-danger .close, .alert-danger .mailbox-attachment-close {
   color: var(--danger);
+  opacity: .2;
+}
+.alert-info {
+  color: var(--info);
+  background-color: var(--soft-info);
+  border-color: var(--info);
+}
+.alert-info .close, .alert-info .mailbox-attachment-close {
+  color: var(--info);
   opacity: .2;
 }
 

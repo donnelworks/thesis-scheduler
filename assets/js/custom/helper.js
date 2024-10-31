@@ -71,12 +71,13 @@ function formValidation(validation) {
 function removeInvalidValidation() {
 	$(".form-control").removeClass("is-invalid");
 	$(".invalid-message").remove();
+	$(".invalid-upload").remove();
 }
 
 // Debounce
 function debounce(func, delay) {
 	let timeoutId;
-	return function(...args) {
+	return function (...args) {
 		if (timeoutId) {
 			clearTimeout(timeoutId);
 		}
@@ -121,7 +122,7 @@ function setPeriode(el, autoFill, config = {}) {
 	};
 
 	if (config.maxSpan) {
-		options.maxSpan = {days: config.maxSpan};
+		options.maxSpan = { days: config.maxSpan };
 	}
 
 	$(el).daterangepicker(options);
@@ -310,8 +311,8 @@ function randomString(length) {
 }
 
 // nl2br
-function nl2br (str, replaceMode, isXhtml) {
-	let breakTag = (isXhtml) ? '<br />' : '<br>';
-	let replaceStr = (replaceMode) ? '$1'+ breakTag : '$1'+ breakTag +'$2';
-	return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr);
-  }
+function nl2br(str, replaceMode, isXhtml) {
+	let breakTag = isXhtml ? "<br />" : "<br>";
+	let replaceStr = replaceMode ? "$1" + breakTag : "$1" + breakTag + "$2";
+	return (str + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, replaceStr);
+}
