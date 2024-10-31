@@ -35,7 +35,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <input type="text" class="form-control rounded" name="nim_filter" placeholder="NIM">
                   </div>
                   <div class="form-group col-md-3">
-                    <input type="text" class="form-control rounded" name="name_filter" placeholder="Nama Dosen">
+                    <input type="text" class="form-control rounded" name="name_filter" placeholder="Nama Mahasiswa">
                   </div>
                   <div class="form-group col-md-3">
                     <select name="study_filter" class="form-control rounded select select-filter">

@@ -53,6 +53,10 @@ class Colleger extends CI_Controller
                 'label' => "Kelas",
                 'rules' => 'trim|required'
             ],
+            'phone' => [
+                'label' => "No. Tlp",
+                'rules' => 'trim|is_natural'
+            ],
         ];
         $validate_result = validate_form($rules);
 

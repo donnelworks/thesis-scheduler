@@ -52,8 +52,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script> -->
 
     <!-- Sidebar -->
     <script type="text/javascript">

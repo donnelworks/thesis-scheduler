@@ -28,9 +28,7 @@ class Submission_m extends CI_Model
     {
         $this->dt->select('
             submission.id,
-            submission.date,
-            submission.time,
-            submission.type,
+            submission.colleger_id,
             submission.title,
             submission.status,
             submission.created_date,
@@ -38,27 +36,27 @@ class Submission_m extends CI_Model
             colleger.nim AS colleger_nim,
             colleger.name AS colleger_name,
             study.name AS study_program_name,
-            lecturer.name AS lecturer_name,
+            main_lecturer.name AS main_lecturer_name,
+            secondary_lecturer.name AS secondary_lecturer_name,
             user_create.name AS created_name,
             user_update.name AS updated_name,
         ')
             ->from("$this->table AS submission")
             ->join('colleger', 'colleger.id = submission.colleger_id', 'left')
             ->join('study_program AS study', 'study.id = colleger.study_program_id', 'left')
-            ->join('lecturer', 'lecturer.id = submission.lecturer_id', 'left')
+            ->join('lecturer AS main_lecturer', 'main_lecturer.id = submission.main_lecturer', 'left')
+            ->join('lecturer AS secondary_lecturer', 'secondary_lecturer.id = submission.secondary_lecturer', 'left')
             ->join('user AS user_create', 'user_create.id = colleger.created_by', 'left')
             ->join('user AS user_update', 'user_update.id = colleger.updated_by', 'left')
-            ->where('submission.deleted_date', null);
+            ->where('submission.deleted_date', NULL);
 
-        if ($filter['periode_filter'] != null) {
-            $this->dt->where('submission.date >=', date('Y-m-d', strtotime($filter['periode_filter'])))
-            ->where('submission.date <=', date('Y-m-d', strtotime($filter['periode_filter'])));
+        if (isset($filter['colleger_filter'])) {
+            if ($filter['colleger_filter'] != NULL) {
+                $this->dt->where('submission.colleger_id', $filter['colleger_filter']);
+            }
         }
-        if ($filter['type_filter'] != null) {
-            $this->dt->where('submission.type', $filter['type_filter']);
-        }
-        if ($filter['nim_filter'] != null) {
-            $this->dt->like('colleger.nim', $filter['nim_filter']);
+        if ($filter['status_filter'] != NULL) {
+            $this->dt->where('submission.status', $filter['status_filter']);
         }
         return $this->dt->generate();
     }

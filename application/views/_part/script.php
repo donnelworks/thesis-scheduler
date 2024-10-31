@@ -74,22 +74,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url() ?>assets/plugins/datatables-rowreorder/js/rowReorder.bootstrap4.min.js"></script>
 <?php } ?>
 
-<!-- Leafletjs -->
+<!-- Custom Input -->
 <?php if (
-    $this->router->fetch_class() === 'dashboard' ||
-    $this->router->fetch_class() === 'schedule'
+    $this->router->fetch_class() === 'submission'
 ) { ?>
-    <script src="<?= base_url() ?>assets/plugins/leaflet/leaflet.js"></script>
-    <script src="<?= base_url() ?>assets/plugins/leaflet/leaflet.snogylop.js"></script>
-    <script src="<?= base_url() ?>assets/plugins/leaflet/Control.FullScreen.js"></script>
+    <script src="<?= base_url() ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <?php } ?>
 
 <!-- Sticky Header -->
 <?php if (
-    $this->router->fetch_class() === 'unit' ||
-    $this->router->fetch_class() === 'team' ||
-    $this->router->fetch_class() === 'member' ||
-    $this->router->fetch_class() === 'user'
+    $this->router->fetch_class() === 'classroom' ||
+    $this->router->fetch_class() === 'colleger' ||
+    $this->router->fetch_class() === 'lecturer' ||
+    $this->router->fetch_class() === 'study_program'
 ) { ?>
     <script src="<?= base_url() ?>assets/js/custom/stickyHeader.js"></script>
 <?php } ?>

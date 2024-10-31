@@ -7,6 +7,7 @@ class Submission extends CI_Controller
     {
         parent::__construct();
         not_login();
+        $this->load->library('upload');
         $this->load->model([
             'submission_m' => 'submission',
             'colleger_m' => 'colleger',
@@ -18,14 +19,12 @@ class Submission extends CI_Controller
     {
         $res['title'] = "Pengajuan Sidang";
         $res['collegers'] = $this->colleger->get_data(['deleted_date' => NULL]);
-        $res['lectures'] = $this->lecturer->get_data(['deleted_date' => NULL]);
         $this->template->load('submission/read', $res, 'submission/read_js');
     }
 
     function create()
     {
         $res['title'] = "Buat Pengajuan Sidang";
-        $res['collegers'] = $this->colleger->get_data(['deleted_date' => NULL]);
         $res['lectures'] = $this->lecturer->get_data(['deleted_date' => NULL]);
         $this->template->load('submission/create', $res, 'submission/create_js');
     }
@@ -34,7 +33,7 @@ class Submission extends CI_Controller
     {
         $filter = $this->input->post();
         header('Content-Type: application/json');
-        $res = $this->mod->load_table($filter);
+        $res = $this->submission->load_table($filter);
         echo $res;
     }
 
@@ -43,25 +42,40 @@ class Submission extends CI_Controller
         $post = $this->input->post();
         $responses = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
 
+        $submission_form = $this->upload('submission_form', 'pdf');
+        $ktm = $this->upload('ktm', 'pdf|jpg|jpeg|png');
+
+        log_debug($submission_form['data']);
+        log_debug($ktm['data']);
+        die;
+
         // Validation
         $rules = [
-            'colleger' => [
-                'label' => "Mahasiswa",
-                'rules' => 'trim|required|callback_colleger_check'
+            'title' => [
+                'label' => "Judul",
+                'rules' => 'trim|required'
             ],
-            'lecturer' => [
-                'label' => "Pembimbing",
-                'rules' => 'trim|required|callback_lecturer_check'
+            'main_lecturer' => [
+                'label' => "Pembimbing Utama",
+                'rules' => 'trim|required'
+            ],
+            'secondary_lecturer' => [
+                'label' => "Pembimbing Pendamping",
+                'rules' => 'trim|required'
+            ],
+            'phone' => [
+                'label' => "No. Tlp.",
+                'rules' => 'trim|required|is_natural'
             ],
         ];
         $validate_result = validate_form($rules);
 
         if ($validate_result['status']) {
             if ($post['submit_action'] === "create") {
-                $this->mod->create_data($post);
+                $this->submission->create_data($post);
                 $responses['data'] = ['message' => "Data berhasil ditambah"];
             } else if ($post['submit_action'] === "update") {
-                $this->mod->update_data($post);
+                $this->submission->update_data($post);
                 $responses['data'] = ['message' => "Data berhasil diubah"];
             }
         } else {
@@ -78,7 +92,7 @@ class Submission extends CI_Controller
         $post = $this->input->post();
         $res = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
 
-        $this->mod->delete_data(['id' => $post['delete_key']]);
+        $this->submission->delete_data(['id' => $post['delete_key']]);
         $res['data'] = ['message' => "Data berhasil dihapus"];
         echo json_encode($res);
     }
@@ -92,7 +106,7 @@ class Submission extends CI_Controller
             $key = ['id !=' => $post['id'], 'colleger_id' => $colleger_id, 'status !=' => 2, 'delete_date' => NULL];
         }
 
-        $isExist = $this->mod->get_data($key)->num_rows();
+        $isExist = $this->submission->get_data($key)->num_rows();
         if ($isExist > 0) {
             $this->form_validation->set_message('colleger_check', '{field} sudah terdaftar');
             return false;
@@ -110,12 +124,35 @@ class Submission extends CI_Controller
             $key = ['id !=' => $post['id'], 'lecturer_id' => $lecturer_id, 'colleger_id' => $post['colleger'], 'status !=' => 2, 'delete_date' => NULL];
         }
 
-        $isExist = $this->mod->get_data($key)->num_rows();
+        $isExist = $this->submission->get_data($key)->num_rows();
         if ($isExist > 0) {
             $this->form_validation->set_message('lecturer_check', '{field} sudah terdaftar di Mahasiswa ini');
             return false;
         } else {
             return true;
         }
+    }
+
+    function upload($file, $allowed_types)
+    {
+        $result = NULL;
+
+        $config['upload_path'] = './assets/files/submissions/';
+        $config['file_name'] = $this->app->user()->nim . "-" . $file;
+        $config['allowed_types'] = $allowed_types;
+        $config['max_size'] = 5000;
+        $config['overwrite'] = TRUE;
+
+        $this->upload->initialize($config);
+        $this->upload->set_message('upload_invalid_filetype', 'Tipe file tidak diizinkan, silakan unggah file PDF');
+        $this->upload->set_message('upload_file_exceeds_limit', "Ukuran file melebihi batas maksimal 5MB");
+
+        if (!$this->upload->do_upload($file)) {
+            $result = ['status' => FALSE, 'data' => $this->upload->display_errors()];
+        } else {
+            $result = ['status' => TRUE, 'data' => $this->upload->data()];
+        }
+
+        return $result;
     }
 }

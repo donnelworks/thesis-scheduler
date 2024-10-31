@@ -8,7 +8,7 @@ class User_m extends CI_Model
     function get_data($where = [], $join = [], $select = '*')
     {
         $this->db->select($select);
-        $this->db->from($this->table);
+        $this->db->from("$this->table AS user");
 
         if (!empty($join)) {
             foreach ($join as $table => $condition) {

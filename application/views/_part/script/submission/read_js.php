@@ -12,6 +12,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
             theme: "bootstrap4",
         });
 
+        // Add Data
+        $(document).on('click', '.btn-add', function() {
+            window.location.href = "<?= site_url('submission/create') ?>";
+        });
+
         // Delete Modal
         $(document).on('click', '.delete-data', function() {
             let data = $(this).data();
@@ -24,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             e.preventDefault();
 
             loadingScreenOn();
-            let req = requestAjax('<?= site_url('colleger/delete_data') ?>', $(this).serialize());
+            let req = requestAjax('<?= site_url('submission/delete_data') ?>', $(this).serialize());
             req.done((res) => {
                 if (res.success) {
                     reloadDatatable('#tblData');
@@ -42,7 +47,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     function loadTable() {
         let tblData = $('#tblData').datatable({
-            url: "<?= site_url('colleger/load_table') ?>",
+            url: "<?= site_url('submission/load_table') ?>",
             formFilter: "#formFilter",
             data: function(d) {
                 let formData = $('#formFilter').serializeArray();
@@ -56,7 +61,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             },
             info: false,
             order: [
-                [7, 'asc'],
+                [8, 'asc'],
             ],
             rowReorder: {
                 enable: false,
@@ -70,38 +75,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     width: '20'
                 },
                 {
-                    data: 'date',
+                    data: 'status',
+                    className: 'min-tablet-l text-truncate-dt',
+                    render: function(data) {
+                        return (data === "0" ? '<span class="badge bg-soft-warning">Pengajuan</span>' : (data === "1" ? '<span class="badge bg-soft-success">Disetujui</span>' : (data === "2" ? '<span class="badge bg-soft-info">Revisi</span>' : '<span class="badge bg-soft-danger">Ditolak</span>')))
+                    }
+                },
+                {
+                    data: 'colleger_nim',
                     className: 'min-tablet-l text-truncate-dt'
                 },
                 {
-                    data: 'nim',
-                    className: 'min-tablet-l text-truncate-dt'
-                },
-                {
-                    data: 'name',
+                    data: 'colleger_name',
                     className: 'all text-truncate-dt'
                 },
                 {
-                    data: 'address',
-                    className: 'min-tablet-l text-truncate-dt',
-                    render: function(data) {
-                        return data ?? "-";
-                    }
-                },
-                {
-                    data: 'phone',
-                    className: 'min-tablet-l text-truncate-dt',
-                    render: function(data) {
-                        return data ?? "-";
-                    }
+                    data: 'title',
+                    className: 'min-tablet-l text-truncate-dt'
                 },
                 {
                     data: 'study_program_name',
                     className: 'min-tablet-l text-truncate-dt'
                 },
                 {
-                    data: 'classroom_name',
-                    className: 'min-tablet-l text-truncate-dt'
+                    data: 'main_lecturer_name',
+                    className: 'none'
+                },
+                {
+                    data: 'secondary_lecturer_name',
+                    className: 'none'
                 },
                 {
                     data: 'created_date',
@@ -130,7 +132,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <i class="bx bx-dots-horizontal-rounded bx-sm"></i>
                             </a>
                             <div class="dropdown-menu rounded-lg border-0 shadow-lg">
-                                <a class="dropdown-item edit-data" href="javascript:void(0)" data-id="${data}" data-nim="${row.nim}" data-name="${row.name}" data-address="${row.address}" data-phone="${row.phone}" data-study="${row.study_program_id}" data-class="${row.classroom_id}">
+                                <a class="dropdown-item edit-data" href="javascript:void(0)" data-id="${data}">
                                 <i class="bx bx-pencil"></i> Ubah</a>
                                 <a class="dropdown-item delete-data" href="javascript:void(0)" data-id="${data}">
                                 <i class="bx bx-trash"></i> Hapus</a>
