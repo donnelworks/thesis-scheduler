@@ -19,31 +19,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow-none rounded-lg border">
-                    <div class="card-body">
-                        <div class="alert alert-primary rounded-lg">
-                            <ol style="list-style-type:upper-alpha; font-weight:700;  padding-left: 20px;">
-                                <li>Persyaratan Akademik</li>
-                                <ol style="font-weight:400; padding-left: 15px;">
-                                    <li>Berstatus sebagai mahasiswa pada tahun akademik bersangkutan.</li>
-                                    <li>Mahasiswa telah menyelesaikan mata kuliah minimal 110 sks dengan indeks prestasi kumulatif minimal 2,75; (Lampirkan transkrip nilai sementara).</li>
-                                    <li>Tidak ada nilai akhir TL dari minimal 110 sks yang telah diambil.</li>
-                                    <li>Total SKS dengan nilai C- tidak lebih dari 10% dari beban kredit total atau setara dengan 11 SKS.</li>
-                                </ol>
-
-                                <li>Persyaratan Administratif</li>
-                                <ol style="font-weight:400; padding-left: 15px;">
-                                    <li>Berstatus sebagai mahasiswa pada tahun akademik bersangkutan.</li>
-                                    <li>Mahasiswa telah menyelesaikan mata kuliah minimal 110 sks dengan indeks prestasi kumulatif minimal 2,75; (Lampirkan transkrip nilai sementara).</li>
-                                    <li>Tidak ada nilai akhir TL dari minimal 110 sks yang telah diambil.</li>
-                                    <li>Total SKS dengan nilai C- tidak lebih dari 10% dari beban kredit total atau setara dengan 11 SKS.</li>
-                                </ol>
-                            </ol>
-                        </div>
-                    </div>
+                <div class="card shadow-none rounded-lg border pt-2">
                     <form id="formData" autocomplete="off" enctype="multipart/form-data">
-                        <input type="hidden" name="id" id="id" readonly>
+                        <div class="sticky-top">
+                            <div class="card-header bg-white" hidden>
+                                <p class="m-0"><a href="<?= site_url('submission') ?>" class="text-muted">Daftar Pengajuan</a></p>
+                                <h3 class="card-title font-weight-bold"><?= $title ?></h3>
+                            </div>
+                            <div class="card-body bg-white">
+                                <button type="submit" class="btn btn-secondary btn-lg rounded btn-save"><i class="bx bx-paper-plane"></i> Buat Pengajuan</button>
+                            </div>
+                        </div>
                         <div class="card-body border-top">
+                            <div class="alert alert-primary rounded-lg">
+                                <ol style="list-style-type:upper-alpha; font-weight:700;  padding-left: 20px;">
+                                    <li>Persyaratan Akademik</li>
+                                    <ol style="font-weight:400; padding-left: 15px;">
+                                        <li>Berstatus sebagai mahasiswa pada tahun akademik bersangkutan.</li>
+                                        <li>Mahasiswa telah menyelesaikan mata kuliah minimal 110 sks dengan indeks prestasi kumulatif minimal 2,75; (Lampirkan transkrip nilai sementara).</li>
+                                        <li>Tidak ada nilai akhir TL dari minimal 110 sks yang telah diambil.</li>
+                                        <li>Total SKS dengan nilai C- tidak lebih dari 10% dari beban kredit total atau setara dengan 11 SKS.</li>
+                                    </ol>
+    
+                                    <li>Persyaratan Administratif</li>
+                                    <ol style="font-weight:400; padding-left: 15px;">
+                                        <li>Berstatus sebagai mahasiswa pada tahun akademik bersangkutan.</li>
+                                        <li>Mahasiswa telah menyelesaikan mata kuliah minimal 110 sks dengan indeks prestasi kumulatif minimal 2,75; (Lampirkan transkrip nilai sementara).</li>
+                                        <li>Tidak ada nilai akhir TL dari minimal 110 sks yang telah diambil.</li>
+                                        <li>Total SKS dengan nilai C- tidak lebih dari 10% dari beban kredit total atau setara dengan 11 SKS.</li>
+                                    </ol>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="card-body border-top">
+                            <input type="hidden" name="id" id="id" readonly>
                             <div class="form-group">
                                 <label>Judul Skripsi/Tugas Akhir</label>
                                 <input type="text" name="title" id="title" class="form-control form-control-lg form-control-border bg-light rounded-0" maxlength="100">
@@ -119,14 +128,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="custom-file">
                                     <input type="file" name="temp_transcripts" class="custom-file-input" id="tempTranscripts" accept=".pdf">
                                     <label class="custom-file-label" id="labelTempTranscripts" for="tempTranscripts">Cari File</label>
-                                </div>
-                                <p class="text-muted m-0"><em>Supported File: PDF. Max 10 MB</em></p>
-                            </div>
-                            <div class="form-group">
-                                <label>UPLOAD Berita Acara Ujian Komprehensif</label>
-                                <div class="custom-file">
-                                    <input type="file" name="comprehensive_exam_ba" class="custom-file-input" id="comprehensiveExamBa" accept=".pdf">
-                                    <label class="custom-file-label" id="labelComprehensiveExamBa" for="comprehensiveExamBa">Cari File</label>
                                 </div>
                                 <p class="text-muted m-0"><em>Supported File: PDF. Max 10 MB</em></p>
                             </div>
@@ -250,15 +251,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <textarea name="publication_journal" id="publicationJournal" class="form-control bg-light rounded" rows="3" maxlength="200"></textarea>
                             </div>
                         </div>
-                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-secondary rounded btn-save"><i class="bx bx-save"></i> Simpan</button>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Delete Modal -->
-    <?php $this->load->view('_part/modal/delete_modal'); ?>
+    <!-- Success Modal -->
+    <?php $this->load->view('_part/modal/success_modal'); ?>
 </section>

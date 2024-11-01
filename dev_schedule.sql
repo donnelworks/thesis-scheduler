@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 30, 2024 at 10:06 AM
+-- Generation Time: Nov 01, 2024 at 09:46 AM
 -- Server version: 8.0.35
 -- PHP Version: 7.4.33
 
@@ -138,36 +138,62 @@ CREATE TABLE `submission` (
   `id` double NOT NULL,
   `colleger_id` double NOT NULL,
   `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `main_mentor` double NOT NULL,
-  `secondary_mentor` double NOT NULL,
+  `main_lecturer` double NOT NULL,
+  `secondary_lecturer` double NOT NULL,
   `phone` varchar(20) NOT NULL,
   `submission_form` varchar(200) NOT NULL,
-  `ktm` varchar(200) NOT NULL,
-  `ktp` varchar(200) NOT NULL,
-  `krs` varchar(200) NOT NULL,
-  `ta_guide_book` varchar(200) NOT NULL,
-  `temp_transcripts` varchar(200) NOT NULL,
-  `comprehensive_exam_ba` varchar(200) NOT NULL,
-  `seminar_result_ba` varchar(200) NOT NULL,
-  `pbak_certificate` varchar(200) NOT NULL,
-  `toefl_certificate` varchar(200) NOT NULL,
-  `toafl_certificate` varchar(200) NOT NULL,
-  `proof_of_memorization` varchar(200) NOT NULL,
-  `it_certificate` varchar(200) NOT NULL,
-  `kukerta_certificate` varchar(200) NOT NULL,
-  `free_lab` varchar(200) NOT NULL,
-  `turnitin` varchar(200) NOT NULL,
-  `draft_ta` varchar(200) NOT NULL,
-  `loa_thesis` varchar(200) DEFAULT NULL,
-  `loa_non_thesis` varchar(200) DEFAULT NULL,
+  `submission_form_status` int NOT NULL,
+  `ktm` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ktm_status` int NOT NULL,
+  `ktp` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ktp_status` int NOT NULL,
+  `krs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `krs_status` int NOT NULL,
+  `ta_guide_book` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ta_guide_book_status` int NOT NULL,
+  `temp_transcripts` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `temp_transcripts_status` int NOT NULL,
+  `comprehensive_exam_ba` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `comprehensive_exam_ba_status` int NOT NULL,
+  `seminar_result_ba` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `seminar_result_ba_status` int NOT NULL,
+  `pbak_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pbak_certificate_status` int NOT NULL,
+  `toefl_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `toefl_certificate_status` int NOT NULL,
+  `toafl_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `toafl_certificate_status` int NOT NULL,
+  `proof_of_memorization` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `proof_of_memorization_status` int NOT NULL,
+  `it_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `it_certificate_status` int NOT NULL,
+  `kukerta_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kukerta_certificate_status` int NOT NULL,
+  `free_lab` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `free_lab_status` int NOT NULL,
+  `turnitin` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `turnitin_status` int NOT NULL,
+  `draft_ta` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `draft_ta_status` int NOT NULL,
+  `loa_thesis` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `loa_thesis_status` int NOT NULL,
+  `loa_non_thesis` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `loa_non_thesis_status` int NOT NULL,
   `publication_journal` varchar(200) DEFAULT NULL,
-  `status` int NOT NULL COMMENT '0=Progress;\r\n1=Confirmed;\r\n2=Rejected;',
+  `status` int NOT NULL COMMENT '0=Progress;\r\n1=Confirmed;\r\n2=Revised;\r\n3=Rejected;',
   `created_date` timestamp NULL DEFAULT NULL,
   `created_by` double DEFAULT NULL,
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `submission`
+--
+
+INSERT INTO `submission` (`id`, `colleger_id`, `title`, `main_lecturer`, `secondary_lecturer`, `phone`, `submission_form`, `submission_form_status`, `ktm`, `ktm_status`, `ktp`, `ktp_status`, `krs`, `krs_status`, `ta_guide_book`, `ta_guide_book_status`, `temp_transcripts`, `temp_transcripts_status`, `comprehensive_exam_ba`, `comprehensive_exam_ba_status`, `seminar_result_ba`, `seminar_result_ba_status`, `pbak_certificate`, `pbak_certificate_status`, `toefl_certificate`, `toefl_certificate_status`, `toafl_certificate`, `toafl_certificate_status`, `proof_of_memorization`, `proof_of_memorization_status`, `it_certificate`, `it_certificate_status`, `kukerta_certificate`, `kukerta_certificate_status`, `free_lab`, `free_lab_status`, `turnitin`, `turnitin_status`, `draft_ta`, `draft_ta_status`, `loa_thesis`, `loa_thesis_status`, `loa_non_thesis`, `loa_non_thesis_status`, `publication_journal`, `status`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
+(4, 1, 'Tes Judul', 1, 1, '083813154407', '12345-submission_form.pdf', 1, '12345-ktm.jpeg', 0, '12345-ktp.jpg', 0, '12345-krs.jpg', 0, '12345-ta_guide_book.pdf', 0, '12345-temp_transcripts.pdf', 0, '12345-comprehensive_exam_ba.pdf', 0, '12345-seminar_result_ba.jpeg', 0, '12345-pbak_certificate.jpg', 0, '12345-toefl_certificate.pdf', 0, '12345-toafl_certificate.pdf', 0, '12345-proof_of_memorization.pdf', 0, '12345-it_certificate.pdf', 0, '12345-kukerta_certificate.pdf', 0, '12345-free_lab.pdf', 0, '12345-turnitin.pdf', 0, '12345-draft_ta.pdf', 0, NULL, 0, '12345-loa_non_thesis.pdf', 0, NULL, 0, '2024-11-01 04:08:34', 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -269,7 +295,7 @@ ALTER TABLE `study_program`
 -- AUTO_INCREMENT for table `submission`
 --
 ALTER TABLE `submission`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

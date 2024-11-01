@@ -7,8 +7,8 @@
   --soft-success: #F4FBF7;
   --info: #50A5F1;
   --soft-info: #D5E8FC;
-  --warning: #FFCB45;
-  --soft-warning: #FFFAEB;
+  --warning: #FB7A5A;
+  --soft-warning: #FFE9E0;
   --danger: #FB7A5A;
   --soft-danger: #FFE9E0;
   --dark: #343A3F;
@@ -32,13 +32,21 @@ a {
 }
 
 a:hover {
-  color: var(--primary) !important;
-  filter: brightness(1.1) !important;
+  color: var(--primary);
+  filter: brightness(1.1);
 }
 
 a.text-muted:hover {
   color: var(--primary) !important;
   filter: brightness(1.1) !important;
+}
+
+.preview-data:hover {
+  cursor: pointer;
+}
+
+.preview-data:disabled:hover {
+  cursor: default !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -71,6 +79,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 .alert-info .close, .alert-info .mailbox-attachment-close {
   color: var(--info);
+  opacity: .2;
+}
+.alert-dark {
+  color: var(--dark);
+  background-color: var(--soft-dark);
+  border-color: var(--dark);
+}
+.alert-dark .close, .alert-dark .mailbox-attachment-close {
+  color: var(--dark);
   opacity: .2;
 }
 
@@ -138,6 +155,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Border */
 .border {
   border: 1px solid var(--border) !important;
+}
+.border-dashed {
+  border: 1px dashed var(--border) !important;
 }
 .border-top {
   border-top: 1px solid var(--border) !important;
@@ -401,6 +421,17 @@ select.is-invalid~.select2-container--bootstrap4 .select2-selection {
 }
 .bg-light + .select2-container--bootstrap4 .select2-selection {
   background-color: var(--light) !important;
+}
+
+/* Form:ICheck */
+.icheck-primary>input:first-child:checked+input[type=hidden]+label::before, 
+.icheck-primary>input:first-child:checked+label::before {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.icheck-primary>input:first-child:not(:checked):not(:disabled):hover+input[type=hidden]+label::before, 
+.icheck-primary>input:first-child:not(:checked):not(:disabled):hover+label::before {
+  border-color: var(--primary);
 }
 
 /* Rounded */
@@ -703,9 +734,9 @@ table.dt-rowReorder-float {
   font-size: 1.2rem;
 }
 .dropdown-item:focus, .dropdown-item:hover {
-  color: var(--white);
-  text-decoration: none;
-  background-color: var(--primary);
+  color: var(--white) !important;
+  text-decoration: none !important;
+  background-color: var(--primary) !important;
 }
 
 /* Content */

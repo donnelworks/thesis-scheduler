@@ -28,7 +28,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <?php if (
     $this->router->fetch_class() === "source" ||
     $this->router->fetch_class() === "member" ||
-    $this->router->fetch_class() === "schedule"
+    $this->router->fetch_class() === "submission" ||
+    $this->router->fetch_class() === "schedule" 
 ) { ?>
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <?php } ?>

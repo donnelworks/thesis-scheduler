@@ -4,10 +4,10 @@ document.addEventListener("scroll", function () {
 	let headerTitle = $(".sticky-top .card-header");
 	let headerPosition = header.offset().top;
 	if (window.scrollY === headerPosition) {
-		header.addClass("shadow-light");
+		header.addClass("shadow-lg");
 		headerTitle.prop("hidden", false);
 	} else {
-		header.removeClass("shadow-light");
+		header.removeClass("shadow-lg");
 		headerTitle.prop("hidden", true);
 	}
 });

@@ -86,7 +86,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $this->router->fetch_class() === 'classroom' ||
     $this->router->fetch_class() === 'colleger' ||
     $this->router->fetch_class() === 'lecturer' ||
-    $this->router->fetch_class() === 'study_program'
+    $this->router->fetch_class() === 'study_program' ||
+    $this->router->fetch_class() === 'submission'
 ) { ?>
     <script src="<?= base_url() ?>assets/js/custom/stickyHeader.js"></script>
 <?php } ?>

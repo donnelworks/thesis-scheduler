@@ -25,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
             <div class="card-body bg-white">
               <?php if ($this->app->user()->role === "2") { ?>
-                <button type="button" class="btn btn-secondary rounded btn-add"><i class="bx bx-plus"></i> Tambah</button>
+                <button type="button" class="btn btn-secondary rounded btn-add" <?= $submission_exist->num_rows() === 0 ? '' : 'disabled' ?>><i class="bx bx-plus"></i> Buat</button>
               <?php } ?>
               <button type="button" class="btn btn-outline-primary rounded btn-filter"><i class="bx bx-filter-alt"></i> Filter</button>
             </div>

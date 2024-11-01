@@ -36,6 +36,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     removeInvalidValidation();
                     $('#formDelete').trigger('reset');
                     $('#mdlDelete').modal('hide');
+                    $('.btn-add').prop('disabled', false);
                     toast("success", res.data.message);
                 }
             }).always(() => {
@@ -78,7 +79,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     data: 'status',
                     className: 'min-tablet-l text-truncate-dt',
                     render: function(data) {
-                        return (data === "0" ? '<span class="badge bg-soft-warning">Pengajuan</span>' : (data === "1" ? '<span class="badge bg-soft-success">Disetujui</span>' : (data === "2" ? '<span class="badge bg-soft-info">Revisi</span>' : '<span class="badge bg-soft-danger">Ditolak</span>')))
+                        return (data === "0" ? '<span class="badge bg-soft-warning">Pengajuan</span>' : (data === "1" ? '<span class="badge bg-soft-success">Disetujui</span>' : (data === "2" ? '<span class="badge bg-soft-info">Revisi</span>' : '<span class="badge bg-soft-dark">Ditolak</span>')))
                     }
                 },
                 {
@@ -132,10 +133,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <i class="bx bx-dots-horizontal-rounded bx-sm"></i>
                             </a>
                             <div class="dropdown-menu rounded-lg border-0 shadow-lg">
-                                <a class="dropdown-item edit-data" href="javascript:void(0)" data-id="${data}">
-                                <i class="bx bx-pencil"></i> Ubah</a>
+                                <a class="dropdown-item detail-data" href="submission/detail/${data}" data-id="${data}">
+                                <i class="bx bx-search"></i> Detail</a>
+                                ${row.status === "0" ?
+                                `<div class="dropdown-divider"></div>
                                 <a class="dropdown-item delete-data" href="javascript:void(0)" data-id="${data}">
-                                <i class="bx bx-trash"></i> Hapus</a>
+                                <i class="bx bx-trash"></i> Hapus</a>` : ''}
                             </div>
                         </div>`;
                     }
