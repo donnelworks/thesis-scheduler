@@ -1,6 +1,3 @@
-// Boostrap Custom Input
-bsCustomFileInput.init();
-
 // Toggle Password Type
 $('[data-toggle="password"]').click(function () {
 	let input = $(this).closest(".input-group").find("input");

@@ -84,13 +84,23 @@ if (!function_exists('generate_order')) {
 }
 
 if (!function_exists('date_time')) {
-    function date_time($value, $type, $sep, $lang = "id")
+    function date_time($value, $type, $sep = "", $lang = "id")
     {
         $monthId = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
         $monthEn = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         $monthIdFull = [1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $monthEnFull = [1 => 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $days = [
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu'
+        ];
 
+        $day = date('D', strtotime($value));
         $fullDate = explode(" ", $value)[0];
         $date = explode("-", $fullDate)[2];
         $month = explode("-", $fullDate)[1];
@@ -127,9 +137,17 @@ if (!function_exists('date_time')) {
         if ($type === "date-number") {
             return $date . $sep . $month . $sep . $year;
         }
+        // Time Full
+        if ($type === "time-full") {
+            return $fullTime;
+        }
         // Time Only
         if ($type === "time") {
-            return $fullTime;
+            return $hour . $sep . $minute;
+        }
+        // Day Indo Only
+        if ($type === "day-indo") {
+            return $days[$day];
         }
     }
 }

@@ -40,8 +40,9 @@ class Submission extends CI_Controller
     {
         
         $res['title'] = "Detail Pengajuan Sidang";
+        $res['lectures'] = $this->lecturer->get_data(['deleted_date' => NULL]);
         $res['data'] = $this->submission->get_data(
-            ['submission.id' => $id, 'submission.colleger_id' => $this->app->user()->colleger_id, 'submission.deleted_date' => NULL],
+            ['submission.id' => $id, 'submission.deleted_date' => NULL],
             ['lecturer AS main_lecturer' => 'main_lecturer.id = submission.main_lecturer', 'lecturer AS secondary_lecturer' => 'secondary_lecturer.id = submission.secondary_lecturer'],
             'submission.*, main_lecturer.name AS main_lecturer_name, secondary_lecturer.name AS secondary_lecturer_name'
         )->row();
@@ -56,7 +57,7 @@ class Submission extends CI_Controller
         echo $res;
     }
 
-    function submit_data()
+    function create_data()
     {
         $post = $this->input->post();
         $res = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
@@ -142,6 +143,113 @@ class Submission extends CI_Controller
         echo json_encode($res);
     }
 
+    function update_data()
+    {
+        $post = $this->input->post();
+        $user = $this->app->user();
+        $res = ['success' => true, 'status_message' => "SUCCESS", 'data' => null];
+
+        if ($user->role === "1") {
+            // Validation
+            if (!isset($post['status'])) {
+                $post['status'] = "";
+            }
+            $rules = [
+                'status' => [
+                    'label' => "Status",
+                    'rules' => 'trim|required'
+                ]
+            ];
+            if ($post['status'] === "2") {
+                $rules['status_notes'] = [
+                    'label' => "Catatan",
+                    'rules' => 'trim|required'
+                ];
+            }
+
+            $validate_result = validate_form($rules);
+    
+            if ($validate_result['status']) {
+                $this->submission->admin_update_data($post);
+                $res['data'] = ['message' => "Status berhasil diubah"];
+            } else {
+                $res['success'] = false;
+                $res['status_message'] = "FORM_VALIDATION_ERROR";
+                $res['data'] = ['error' => $validate_result['error']];
+            }
+        }
+
+        if ($user->role === "2") {
+            // Validation
+            $rules = [
+                'title' => [
+                    'label' => "Judul",
+                    'rules' => 'trim|required'
+                ],
+                'main_lecturer' => [
+                    'label' => "Pembimbing Utama",
+                    'rules' => 'trim|required'
+                ],
+                'secondary_lecturer' => [
+                    'label' => "Pembimbing Pendamping",
+                    'rules' => 'trim|required'
+                ],
+                'phone' => [
+                    'label' => "No. Tlp.",
+                    'rules' => 'trim|required|is_natural'
+                ],
+            ];
+            $validate_result = validate_form($rules);
+    
+            if ($validate_result['status']) {
+                $uploads = [
+                    'submission_form' => 'pdf',
+                    'ktm' => 'pdf|jpg|jpeg|png',
+                    'ktp' => 'pdf|jpg|jpeg|png',
+                    'krs' => 'pdf|jpg|jpeg|png',
+                    'ta_guide_book' => 'pdf',
+                    'temp_transcripts' => 'pdf',
+                    'comprehensive_exam_ba' => 'pdf',
+                    'seminar_result_ba' => 'pdf|jpg|jpeg|png',
+                    'pbak_certificate' => 'pdf|jpg|jpeg|png',
+                    'toefl_certificate' => 'pdf',
+                    'toafl_certificate' => 'pdf',
+                    'proof_of_memorization' => 'pdf',
+                    'it_certificate' => 'pdf',
+                    'kukerta_certificate' => 'pdf',
+                    'free_lab' => 'pdf',
+                    'turnitin' => 'pdf',
+                    'draft_ta' => 'pdf',
+                    'loa_thesis' => 'pdf',
+                    'loa_non_thesis' => 'pdf',
+                ];
+    
+                foreach ($uploads as $field => $allowed_types) {
+                    if (empty($_FILES[$field]['name'])) {
+                        continue;
+                    }
+    
+                    if (!$this->upload($field, $allowed_types)['status']) {
+                        $res = ['success' => false, 'status_message' => "ERROR_UPLOAD", 'data' => ['field' => $field, 'message' => $this->upload($field, $allowed_types)['data']]];
+                        echo json_encode($res);
+                        return;
+                    }
+                    
+                    $post[$field] = $this->upload($field, $allowed_types)['data']['file_name'];
+                }
+    
+                $this->submission->colleger_update_data($post);
+                $res['data'] = ['message' => "Data berhasil disimpan"];
+            } else {
+                $res['success'] = false;
+                $res['status_message'] = "FORM_VALIDATION_ERROR";
+                $res['data'] = ['error' => $validate_result['error']];
+            }
+        }
+
+        echo json_encode($res);
+    }
+
     function delete_data()
     {
         $post = $this->input->post();
@@ -156,9 +264,9 @@ class Submission extends CI_Controller
     {
         $post = $this->input->post();
         if ($post['submit_action'] === "create") {
-            $key = ['colleger_id' => $colleger_id, 'status !=' => 2, 'delete_date' => NULL];
+            $key = ['colleger_id' => $colleger_id, 'status !=' => 2, 'deleted_date' => NULL];
         } else if ($post['submit_action'] === "update") {
-            $key = ['id !=' => $post['id'], 'colleger_id' => $colleger_id, 'status !=' => 2, 'delete_date' => NULL];
+            $key = ['id !=' => $post['id'], 'colleger_id' => $colleger_id, 'status !=' => 2, 'deleted_date' => NULL];
         }
 
         $isExist = $this->submission->get_data($key)->num_rows();
@@ -174,9 +282,9 @@ class Submission extends CI_Controller
     {
         $post = $this->input->post();
         if ($post['submit_action'] === "create") {
-            $key = ['lecturer_id' => $lecturer_id, 'colleger_id' => $post['colleger'], 'status !=' => 2, 'delete_date' => NULL];
+            $key = ['lecturer_id' => $lecturer_id, 'colleger_id' => $post['colleger'], 'status !=' => 2, 'deleted_date' => NULL];
         } else if ($post['submit_action'] === "update") {
-            $key = ['id !=' => $post['id'], 'lecturer_id' => $lecturer_id, 'colleger_id' => $post['colleger'], 'status !=' => 2, 'delete_date' => NULL];
+            $key = ['id !=' => $post['id'], 'lecturer_id' => $lecturer_id, 'colleger_id' => $post['colleger'], 'status !=' => 2, 'deleted_date' => NULL];
         }
 
         $isExist = $this->submission->get_data($key)->num_rows();

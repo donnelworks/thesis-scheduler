@@ -79,7 +79,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     data: 'status',
                     className: 'min-tablet-l text-truncate-dt',
                     render: function(data) {
-                        return (data === "0" ? '<span class="badge bg-soft-warning">Pengajuan</span>' : (data === "1" ? '<span class="badge bg-soft-success">Disetujui</span>' : (data === "2" ? '<span class="badge bg-soft-info">Revisi</span>' : '<span class="badge bg-soft-dark">Ditolak</span>')))
+                        return (data === "0" ? '<span class="badge bg-soft-info">Pengajuan</span>' : (data === "1" ? '<span class="badge bg-soft-success">Disetujui</span>' : (data === "2" ? '<span class="badge bg-soft-warning">Revisi</span>' : '<span class="badge bg-soft-dark">Ditolak</span>')))
                     }
                 },
                 {

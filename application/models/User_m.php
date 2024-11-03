@@ -41,7 +41,7 @@ class User_m extends CI_Model
             ->from("$this->table AS user")
             ->join('user AS user_create', 'user_create.id = user.created_by', 'left')
             ->join('user AS user_update', 'user_update.id = user.updated_by', 'left')
-            ->where('user.id !=', $user_id)
+            // ->where('user.id !=', $user_id)
             ->where('user.deleted_date', NULL);
 
         if ($filter['role_filter'] != NULL) {

@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-no-expand sidebar-light-primary border-right elevation-0">
   <!-- Brand Logo -->
   <a href="<?= site_url('dashboard') ?>" class="brand-link text-center d-flex">
-    <img src="<?= base_url() ?>assets/img/logo/siska-logo-color.svg" alt="Logo" class="brand-image align-self-center">
+    <img src="<?= base_url() ?>assets/img/logo-fsains.png" alt="Logo" class="brand-image align-self-center">
     <span class="brand-text font-weight-bold text-center">
-      <?= $this->config->item('app_name') ?>
+      JADWAL SIDANG
     </span>
   </a>
 

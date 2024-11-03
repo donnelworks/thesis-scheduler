@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 01, 2024 at 09:46 AM
+-- Generation Time: Nov 03, 2024 at 04:16 AM
 -- Server version: 8.0.35
 -- PHP Version: 7.4.33
 
@@ -38,14 +38,6 @@ CREATE TABLE `classroom` (
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `classroom`
---
-
-INSERT INTO `classroom` (`id`, `name`, `notes`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(1, 'SI A Pagi', NULL, '2024-10-29 07:59:29', 1, '2024-10-29 08:00:13', 1, NULL),
-(2, 'TI A Pagi', NULL, '2024-10-30 01:19:55', 1, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -66,14 +58,6 @@ CREATE TABLE `colleger` (
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `colleger`
---
-
-INSERT INTO `colleger` (`id`, `nim`, `name`, `address`, `phone`, `study_program_id`, `classroom_id`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(1, '12345', 'Putra Anggara', NULL, NULL, 1, 2, '2024-10-30 01:17:11', 1, '2024-10-30 01:20:11', 1, NULL),
-(2, '123456', 'Anggara Putra', NULL, NULL, 2, 1, '2024-10-30 01:19:32', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,12 +80,28 @@ CREATE TABLE `lecturer` (
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `lecturer`
+-- Table structure for table `schedule`
 --
 
-INSERT INTO `lecturer` (`id`, `nidn`, `nip`, `name`, `address`, `study_program_id`, `job_position`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(1, '12345', NULL, 'Drs. Donny Anggara', 'Jl. Pepaya Raya', 1, 'Asisten Ahli', '2024-10-29 09:19:21', 1, NULL, NULL, NULL);
+CREATE TABLE `schedule` (
+  `id` double NOT NULL,
+  `date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `number` varchar(100) NOT NULL,
+  `lead_tester` double NOT NULL,
+  `main_tester` double NOT NULL,
+  `secondary_tester` double NOT NULL,
+  `submission_id` double NOT NULL,
+  `created_date` timestamp NOT NULL,
+  `created_by` double NOT NULL,
+  `updated_date` timestamp NULL DEFAULT NULL,
+  `updated_by` double DEFAULT NULL,
+  `deleted_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -119,14 +119,6 @@ CREATE TABLE `study_program` (
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `study_program`
---
-
-INSERT INTO `study_program` (`id`, `name`, `notes`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(1, 'TEKNIK INFORMATIKA', 'TI', '2024-10-29 07:17:45', 1, '2024-10-29 07:26:49', 1, NULL),
-(2, 'SISTEM INFORMASI', 'SI', '2024-10-29 07:36:59', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -181,19 +173,13 @@ CREATE TABLE `submission` (
   `loa_non_thesis_status` int NOT NULL,
   `publication_journal` varchar(200) DEFAULT NULL,
   `status` int NOT NULL COMMENT '0=Progress;\r\n1=Confirmed;\r\n2=Revised;\r\n3=Rejected;',
+  `status_notes` varchar(200) DEFAULT NULL,
   `created_date` timestamp NULL DEFAULT NULL,
   `created_by` double DEFAULT NULL,
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `submission`
---
-
-INSERT INTO `submission` (`id`, `colleger_id`, `title`, `main_lecturer`, `secondary_lecturer`, `phone`, `submission_form`, `submission_form_status`, `ktm`, `ktm_status`, `ktp`, `ktp_status`, `krs`, `krs_status`, `ta_guide_book`, `ta_guide_book_status`, `temp_transcripts`, `temp_transcripts_status`, `comprehensive_exam_ba`, `comprehensive_exam_ba_status`, `seminar_result_ba`, `seminar_result_ba_status`, `pbak_certificate`, `pbak_certificate_status`, `toefl_certificate`, `toefl_certificate_status`, `toafl_certificate`, `toafl_certificate_status`, `proof_of_memorization`, `proof_of_memorization_status`, `it_certificate`, `it_certificate_status`, `kukerta_certificate`, `kukerta_certificate_status`, `free_lab`, `free_lab_status`, `turnitin`, `turnitin_status`, `draft_ta`, `draft_ta_status`, `loa_thesis`, `loa_thesis_status`, `loa_non_thesis`, `loa_non_thesis_status`, `publication_journal`, `status`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(4, 1, 'Tes Judul', 1, 1, '083813154407', '12345-submission_form.pdf', 1, '12345-ktm.jpeg', 0, '12345-ktp.jpg', 0, '12345-krs.jpg', 0, '12345-ta_guide_book.pdf', 0, '12345-temp_transcripts.pdf', 0, '12345-comprehensive_exam_ba.pdf', 0, '12345-seminar_result_ba.jpeg', 0, '12345-pbak_certificate.jpg', 0, '12345-toefl_certificate.pdf', 0, '12345-toafl_certificate.pdf', 0, '12345-proof_of_memorization.pdf', 0, '12345-it_certificate.pdf', 0, '12345-kukerta_certificate.pdf', 0, '12345-free_lab.pdf', 0, '12345-turnitin.pdf', 0, '12345-draft_ta.pdf', 0, NULL, 0, '12345-loa_non_thesis.pdf', 0, NULL, 0, '2024-11-01 04:08:34', 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -220,8 +206,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `pass`, `name`, `role`, `colleger_id`, `created_date`, `created_by`, `updated_date`, `updated_by`, `deleted_date`) VALUES
-(1, 'admin', '$2y$10$DM7N.x1wknps99bfCL8Euu1jf2YICCiepC3qka77PJgB0MbTmb2nq', 'Operator', 1, NULL, '2024-10-29 03:10:37', 1, '2024-10-30 08:29:51', 1, NULL),
-(2, '12345', '$2y$10$9zFebcQReK.zktxaR997ve0vNLM1tV7ptN8MecncP2dVjQ54gl8ty', 'Putra Anggara', 2, 1, '2024-10-30 08:11:04', 1, NULL, NULL, NULL);
+(1, 'admin', '$2y$10$DM7N.x1wknps99bfCL8Euu1jf2YICCiepC3qka77PJgB0MbTmb2nq', 'Operator', 1, NULL, '2024-10-29 03:10:37', 1, '2024-10-30 08:29:51', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -243,6 +228,12 @@ ALTER TABLE `colleger`
 -- Indexes for table `lecturer`
 --
 ALTER TABLE `lecturer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -271,37 +262,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `classroom`
 --
 ALTER TABLE `classroom`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `colleger`
 --
 ALTER TABLE `colleger`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `lecturer`
 --
 ALTER TABLE `lecturer`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `study_program`
 --
 ALTER TABLE `study_program`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `submission`
 --
 ALTER TABLE `submission`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

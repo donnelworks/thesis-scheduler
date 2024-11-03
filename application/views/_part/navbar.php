@@ -69,10 +69,10 @@
           <strong><?= $this->app->user()->name ?></strong> <br> Admin
         </span>
         <div class="dropdown-divider"></div>
-        <a href="javascript:void(0)" class="dropdown-item d-flex align-items-center">
+        <!-- <a href="javascript:void(0)" class="dropdown-item d-flex align-items-center">
           <i class="bx bx-user-circle mr-2"></i> Profile
-        </a>
-        <div class="dropdown-divider"></div>
+        </a> -->
+        <!-- <div class="dropdown-divider"></div> -->
         <a href="<?= site_url('auth/logout') ?>" id="onLogout" class="dropdown-item d-flex align-items-center mb-2">
           <i class="bx bx-power-off mr-2"></i> Keluar
         </a>

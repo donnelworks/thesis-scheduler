@@ -10,8 +10,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <h5 class="m-0"></h5>
                 <p class="m-0"></p>
             </div>
-            <div class="modal-footer justify-content-between">
-                <a class="btn btn-success rounded border-0" id="btnDone"></a>
+            <div class="modal-footer">
+                <a class="btn btn-success btn-block rounded border-0" id="btnDone"></a>
             </div>
         </div>
     </div>

@@ -35,7 +35,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <?php } ?>
 
 <!-- DataTables -->
-<?php if ($this->router->fetch_class() !== "dashboard") { ?>
+<?php if (
+    $this->router->fetch_class() !== "dashboard"
+) { ?>
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">

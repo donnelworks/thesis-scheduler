@@ -1,6 +1,8 @@
 :root {
-  --primary: #4646B5;
-  --soft-primary: #DADAF1;
+  /* --primary: #4646B5; */
+  /* --soft-primary: #DADAF1; */
+  --primary: #7D0104;
+  --soft-primary: #FFF7F5;
   --secondary: #FB7A5A;
   --soft-secondary: #FFE9E0;
   --success: #008C5B;
@@ -33,7 +35,7 @@ a {
 
 a:hover {
   color: var(--primary);
-  filter: brightness(1.1);
+  /* filter: brightness(1.1); */
 }
 
 a.text-muted:hover {
@@ -41,7 +43,7 @@ a.text-muted:hover {
   filter: brightness(1.1) !important;
 }
 
-.preview-data:hover {
+.preview-data:not(:disabled):hover {
   cursor: pointer;
 }
 
@@ -63,6 +65,15 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--primary);
   opacity: .2;
 }
+.alert-success {
+  color: var(--success);
+  background-color: var(--soft-success);
+  border-color: var(--success);
+}
+.alert-success .close, .alert-success .mailbox-attachment-close {
+  color: var(--success);
+  opacity: .2;
+}
 .alert-danger {
   color: var(--danger);
   background-color: var(--soft-danger);
@@ -70,6 +81,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 .alert-danger .close, .alert-danger .mailbox-attachment-close {
   color: var(--danger);
+  opacity: .2;
+}
+.alert-warning {
+  color: var(--warning);
+  background-color: var(--soft-warning);
+  border-color: var(--warning);
+}
+.alert-warning .close, .alert-warning .mailbox-attachment-close {
+  color: var(--warning);
   opacity: .2;
 }
 .alert-info {
@@ -423,6 +443,81 @@ select.is-invalid~.select2-container--bootstrap4 .select2-selection {
   background-color: var(--light) !important;
 }
 
+/* Date Time Picker */
+.datepicker.dropdown-menu {
+  padding: 10px;
+  border-radius: .6rem !important;
+}
+.datepicker-dropdown:before {
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-top: 0;
+  border-bottom-color: var(--light);
+}
+.daterangepicker td.in-range {
+  background-color: var(--soft-secondary);
+  color: var(--secondary);
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: var(--secondary);
+  border-color: transparent;
+  color: var(--white);
+}
+.daterangepicker {
+  box-shadow: var(--shadow-lg);
+  border-radius: .6rem;
+  border: 0;
+}
+.daterangepicker .btn {
+  border-radius: 4px;
+}
+.daterangepicker:before {
+  top: -7px;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+.datepicker .table th, .datepicker .table td {
+  border: 0 !important;
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: var(--secondary);
+  text-shadow: unset !important;
+}
+.bootstrap-datetimepicker-widget table td span.active {
+  background-color: var(--secondary);
+}
+.bootstrap-datetimepicker-widget table td.today:before {
+  border-bottom-color: var(--secondary);
+}
+.datepicker table tr td.today, .datepicker table tr td.today.disabled, .datepicker table tr td.today.disabled:hover, .datepicker table tr td.today:hover {
+  background-color: var(--soft-secondary);
+  background-image: unset !important;
+  background-image: unset !important;
+  background-image: unset !important;
+  background-image: unset !important;
+  filter: unset !important;
+  filter: unset !important;
+  color: var(--secondary);
+}
+.datepicker.datepicker-inline {
+  width: 100%;
+}
+.datepicker.datepicker-inline table {
+  width: 100%;
+}
+.fa-arrow-up:before {
+  content: "\f077";
+}
+.fa-arrow-down:before {
+  content: "\f078";
+}
+.bootstrap-datetimepicker-widget .timepicker .timepicker-picker a.btn {
+  color: var(--secondary) !important;
+}
+
 /* Form:ICheck */
 .icheck-primary>input:first-child:checked+input[type=hidden]+label::before, 
 .icheck-primary>input:first-child:checked+label::before {
@@ -532,6 +627,12 @@ select.is-invalid~.select2-container--bootstrap4 .select2-selection {
   color: var(--white) !important;
 }
 
+/* Login */
+.login-page, .register-page {
+  height: unset !important;
+  min-height: 100vh !important;
+}
+
 /* Nav */
 .nav-link {
   display: flex !important;
@@ -541,6 +642,10 @@ select.is-invalid~.select2-container--bootstrap4 .select2-selection {
 .nav-pills .nav-link:not(.active):hover {
   color: var(--gray);
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: var(--secondary);
+}
+
 
 /* Sidebar */
 .sidebar {

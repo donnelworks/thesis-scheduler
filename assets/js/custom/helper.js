@@ -281,9 +281,13 @@ function dateTime(value, type, sep = "", lang = "id") {
 	if (type === "month") {
 		return lang === "id" ? monthId[Math.abs(value)] : monthEn[Math.abs(value)];
 	}
-	// Time Only
-	if (type === "time") {
+	// Time Full
+	if (type === "time-full") {
 		return fullTime;
+	}
+	// Time
+	if (type === "time") {
+		return hour + sep + minute;
 	}
 }
 

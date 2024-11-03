@@ -18,7 +18,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             removeInvalidValidation();
             let form = $('#formData')[0];
             let data = new FormData(form);
-            let req = requestUploadAjax('<?= site_url('submission/submit_data') ?>', data);
+            let req = requestUploadAjax('<?= site_url('submission/create_data') ?>', data);
             req.done((res) => {
                 if (res.success) {
                     $('#formData').trigger('reset');

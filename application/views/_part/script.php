@@ -52,7 +52,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <script src="<?= base_url() ?>assets/js/custom/nunber.js"></script> -->
 
 <!-- DataTables & Plugins -->
-<?php if ($this->router->fetch_class() !== "dashboard") { ?>
+<?php if (
+    $this->router->fetch_class() !== "dashboard"
+) { ?>
     <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -79,6 +81,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $this->router->fetch_class() === 'submission'
 ) { ?>
     <script src="<?= base_url() ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script>bsCustomFileInput.init();</script>
 <?php } ?>
 
 <!-- Sticky Header -->
@@ -87,7 +90,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
     $this->router->fetch_class() === 'colleger' ||
     $this->router->fetch_class() === 'lecturer' ||
     $this->router->fetch_class() === 'study_program' ||
-    $this->router->fetch_class() === 'submission'
+    $this->router->fetch_class() === 'submission' ||
+    $this->router->fetch_class() === 'schedule'
 ) { ?>
     <script src="<?= base_url() ?>assets/js/custom/stickyHeader.js"></script>
 <?php } ?>

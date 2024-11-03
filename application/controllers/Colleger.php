@@ -91,9 +91,9 @@ class Colleger extends CI_Controller
     {
         $post = $this->input->post();
         if ($post['submit_action'] === "create") {
-            $key = ['nim' => $nim, 'delete_date' => NULL];
+            $key = ['nim' => $nim, 'deleted_date' => NULL];
         } else if ($post['submit_action'] === "update") {
-            $key = ['id !=' => $post['id'], 'nim' => $nim, 'delete_date' => NULL];
+            $key = ['id !=' => $post['id'], 'nim' => $nim, 'deleted_date' => NULL];
         }
 
         $isExist = $this->mod->get_data($key)->num_rows();

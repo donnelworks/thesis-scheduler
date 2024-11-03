@@ -85,9 +85,9 @@ class Lecturer extends CI_Controller
     {
         $post = $this->input->post();
         if ($post['submit_action'] === "create") {
-            $key = ['nidn' => $nidn, 'delete_date' => NULL];
+            $key = ['nidn' => $nidn, 'deleted_date' => NULL];
         } else if ($post['submit_action'] === "update") {
-            $key = ['id !=' => $post['id'], 'nidn' => $nidn, 'delete_date' => NULL];
+            $key = ['id !=' => $post['id'], 'nidn' => $nidn, 'deleted_date' => NULL];
         }
 
         $isExist = $this->mod->get_data($key)->num_rows();
