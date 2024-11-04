@@ -36,7 +36,7 @@ CREATE TABLE `classroom` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE `colleger` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -72,13 +72,13 @@ CREATE TABLE `lecturer` (
   `name` varchar(100) NOT NULL,
   `address` varchar(200) DEFAULT NULL,
   `study_program_id` double NOT NULL,
-  `job_position` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `job_position` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `created_date` timestamp NULL DEFAULT NULL,
   `created_by` double DEFAULT NULL,
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE `schedule` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE `study_program` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -129,47 +129,47 @@ CREATE TABLE `study_program` (
 CREATE TABLE `submission` (
   `id` double NOT NULL,
   `colleger_id` double NOT NULL,
-  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `title` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `main_lecturer` double NOT NULL,
   `secondary_lecturer` double NOT NULL,
   `phone` varchar(20) NOT NULL,
   `submission_form` varchar(200) NOT NULL,
   `submission_form_status` int NOT NULL,
-  `ktm` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ktm` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `ktm_status` int NOT NULL,
-  `ktp` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ktp` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `ktp_status` int NOT NULL,
-  `krs` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `krs` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `krs_status` int NOT NULL,
-  `ta_guide_book` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ta_guide_book` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `ta_guide_book_status` int NOT NULL,
-  `temp_transcripts` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `temp_transcripts` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `temp_transcripts_status` int NOT NULL,
-  `comprehensive_exam_ba` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `comprehensive_exam_ba` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `comprehensive_exam_ba_status` int NOT NULL,
-  `seminar_result_ba` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `seminar_result_ba` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `seminar_result_ba_status` int NOT NULL,
-  `pbak_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pbak_certificate` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `pbak_certificate_status` int NOT NULL,
-  `toefl_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `toefl_certificate` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `toefl_certificate_status` int NOT NULL,
-  `toafl_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `toafl_certificate` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `toafl_certificate_status` int NOT NULL,
-  `proof_of_memorization` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `proof_of_memorization` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `proof_of_memorization_status` int NOT NULL,
-  `it_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `it_certificate` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `it_certificate_status` int NOT NULL,
-  `kukerta_certificate` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kukerta_certificate` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `kukerta_certificate_status` int NOT NULL,
-  `free_lab` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `free_lab` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `free_lab_status` int NOT NULL,
-  `turnitin` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `turnitin` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `turnitin_status` int NOT NULL,
-  `draft_ta` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `draft_ta` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `draft_ta_status` int NOT NULL,
-  `loa_thesis` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `loa_thesis` varchar(200) CHARACTER SET utf8mb4 DEFAULT NULL,
   `loa_thesis_status` int NOT NULL,
-  `loa_non_thesis` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `loa_non_thesis` varchar(200) CHARACTER SET utf8mb4 DEFAULT NULL,
   `loa_non_thesis_status` int NOT NULL,
   `publication_journal` varchar(200) DEFAULT NULL,
   `status` int NOT NULL COMMENT '0=Progress;\r\n1=Confirmed;\r\n2=Revised;\r\n3=Rejected;',
@@ -179,7 +179,7 @@ CREATE TABLE `submission` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE `submission` (
 CREATE TABLE `user` (
   `id` double NOT NULL,
   `username` varchar(100) NOT NULL,
-  `pass` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pass` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `name` varchar(200) NOT NULL,
   `role` int NOT NULL COMMENT '1=Admin;\r\n2=Colleger;',
   `colleger_id` double DEFAULT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE `user` (
   `updated_date` timestamp NULL DEFAULT NULL,
   `updated_by` double DEFAULT NULL,
   `deleted_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`

@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => (ENVIRONMENT !== 'production') ? 'root' : 'u379078177_sipagi',
-	'password' => (ENVIRONMENT !== 'production') ? 'root' : 'u379078177_Sipagi',
-	'database' => (ENVIRONMENT !== 'production') ? 'dev_schedule' : 'u379078177_sipagi',
+	'username' => (ENVIRONMENT !== 'production') ? 'root' : 'sisy1114_schedule',
+	'password' => (ENVIRONMENT !== 'production') ? 'root' : 'sisy1114_schedule',
+	'database' => (ENVIRONMENT !== 'production') ? 'dev_schedule' : 'sisy1114_schedule',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
